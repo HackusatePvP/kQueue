@@ -11,5 +11,5 @@ kQueue is a simple queue plugin designed for BungeeCord to limit the amount of p
 The api wiki can be viewed [here](https://github.com/HackusatePvP/kQueue/wiki).
 
 ## Licensing
-This project is created by FateNetwork and released to the public.
+This project is created by FateNetwork and released to the public.  
 License: [GNU](https://github.com/HackusatePvP/kQueue/blob/master/LICENSE)
