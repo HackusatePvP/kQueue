@@ -14,10 +14,6 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -84,15 +80,6 @@ public final class Core extends JavaPlugin {
     }
 
     private boolean checkLicense() {
-        try {
-            String web = "http://96.3.153.37/checklicense.php?license=" + getConfiguration("config").getString("license");
-            URL url = new URL(web);
-            URLConnection connection = url.openConnection();
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String auth = in.readLine();
-            return !auth.equals("invalid");
-        } catch (Exception var6) {
-            return false;
-        }
+        return false;
     }
 }
