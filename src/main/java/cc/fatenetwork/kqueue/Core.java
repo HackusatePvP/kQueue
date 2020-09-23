@@ -80,6 +80,6 @@ public final class Core extends JavaPlugin {
     }
 
     private boolean checkLicense() {
-        return false;
+        return true;
     }
 }
