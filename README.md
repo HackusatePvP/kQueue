@@ -2,7 +2,7 @@
 kQueue is a simple queue plugin designed for BungeeCord to limit the amount of players that can join a server at one given time.
 
 ## Features
-* Playercounter (for each server)
+* Playercounter (for each server) 
 * Configurable
 * Server status
 * Api
