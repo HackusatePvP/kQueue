@@ -1,0 +1,24 @@
+########################################################################################################################
+# Main queue configuration
+# exmaple:
+#   name: "Example" this is case sensitive for the api
+#   enabled: true whether or not the player can join the queue
+#   send-amount: 10 The amount of players you want to send at one given time.
+#   send-delay: the delay (in seconds) before player is sent to the server
+#   isServer: true if you have configured a server for the queue put true, if not false
+#   server: "Example" only have this field if you have a server configured for the queue
+########################################################################################################################
+
+example:
+  name: "Example"
+  enabled: true
+  send-amount: 10
+  send-delay: 5
+  isServer: true
+  server: "Example"
+
+example2:
+  name: "Example2"
+  enabled: true
+  isServer: false #Since its false you do not add server: to the configuration
+  command: "send %PLAYER% %QUEUE%"

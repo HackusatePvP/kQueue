@@ -1,0 +1,9 @@
+name: kQueue
+version: ${project.version}
+main: cc.fatenetwork.kqueue.Core
+authors: [Hackusate]
+commands:
+  queue:
+    aliases: [q]
+    description: Main queue executor
+  test:

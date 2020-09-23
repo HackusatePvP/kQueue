@@ -1,0 +1,13 @@
+########################################################################################################################
+# Main server configuration
+#
+# The server configuration is used if you want the plugin to handle all server information. Such as
+# player count, and server state
+#
+# name will be used as the server name in the api
+# server-state has three options; ONLINE, OFFLINE, WHITELIST
+########################################################################################################################
+
+skyblock:
+  name: "skyblock"
+  server-state: "ONLINE"

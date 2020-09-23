@@ -1,0 +1,33 @@
+###
+# configurations blow can have the following placeholder
+#%CMD%
+#%ARG%
+###
+argument-not-found: "&cCould not find %ARG% for %CMD%."
+
+###
+#configurations blow can have the following placeholder
+#%QUEUE%
+###
+already-in-queue: "&cYou are already in a queue."
+queue-leave: "&cYou have left the %QUEUE% queue."
+queue-pause: "&c%QUEUE% queue is paused."
+
+###
+#configurations blow can have the following placeholder
+#%QUEUE%
+#%POSITION%
+#%QUEUESIZE%
+###
+queue-update-position: "&3Your poistion is now #&b%POSITION% &3/ &b%QUEUESIZE%"
+
+###
+#There are no placeholders for the following configurations
+###
+no-permissions: "&cYou do not have permissions to execute this command."
+queue-donor: "&3You can purchase &branks &3to increase your queue &bpriority&3."
+queue-command-join-error: "&c/queue join <queue>"
+queue-command-leave-error: "&c/queue leave"
+queue-command-pause-error: "&c/queue pause <queue>"
+queue-command-resume-error: "&c/queue resume <queue>"
+not-in-queue: "&cYou are not in a queue."
