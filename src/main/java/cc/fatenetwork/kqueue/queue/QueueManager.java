@@ -79,27 +79,33 @@ public class QueueManager implements QueueInterface {
 
     @Override
     public void updateQueue(Queue queue) {
+        //We need to maps so we can properly sort the queue based by the players priority and by position
+
         Map<QueuePlayer, Integer> sortedByPlayers;
         Map<QueuePlayer, Integer> sortedByPosition;
 
+        //next lets sort the players based on weight, so the ones with the highest value appear first
         sortedByPlayers = queue.getByWeight().entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
         queue.setByWeight(sortedByPlayers);
 
+        //once the map is sorted by priority we can now set their positions based on there placement in the map
        AtomicInteger pos = new AtomicInteger();
        sortedByPlayers.forEach((key, value) -> {
             pos.getAndIncrement();
             queue.getByPosition().put(key, pos.intValue());
        });
 
+       //now lets resort the map based on the positions. This will be in reversed order, so the player with the lowest poisiton appear first
        sortedByPosition = queue.getByPosition().entrySet().stream()
-               .sorted(Map.Entry.comparingByValue())
+               .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
        queue.setByPosition(sortedByPosition);
 
+       //lets send all players in the the queue a messages when its updated.
         for (QueuePlayer queuePlayer : queue.getByWeight().keySet()) {
             ConfigFile config = plugin.getConfiguration("lang");
             queuePlayer.getPlayer().sendMessage(StringUtil.format(config.getString("queue-donor")));

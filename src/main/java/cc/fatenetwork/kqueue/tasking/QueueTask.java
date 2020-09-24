@@ -24,7 +24,7 @@ public class QueueTask extends BukkitRunnable {
                 plugin.getLogger().info(queue.getName() + ": " + d + "/" + queue.getSendDelay());
                 if (d == queue.getSendDelay()) {
                     int amountToSend = 0;
-                    while (amountToSend < queue.getAmountToSend()) {
+                    do {
                         QueuePlayer queuePlayer = queue.getByPosition().keySet().stream().findFirst().orElse(null);
                         if (queuePlayer != null) {
                             if (!queue.isPause()) {
@@ -32,7 +32,7 @@ public class QueueTask extends BukkitRunnable {
                                 amountToSend++;
                             }
                         }
-                    }
+                    } while (amountToSend < queue.getAmountToSend());
                     plugin.getQueueInterface().updateQueue(queue);
                     d = 0;
                     queue.setTick(d);

@@ -24,7 +24,7 @@ public final class Core extends JavaPlugin {
     private QueueInterface queueInterface;
     private ServerManager serverManager;
     private QueueTask queueTask;
-    private Collection<ConfigFile> files = new HashSet<>();
+    private final Collection<ConfigFile> files = new HashSet<>();
     @Getter private static Core plugin;
 
     @Override
@@ -38,7 +38,6 @@ public final class Core extends JavaPlugin {
         registerEvents();
         registerCommands();
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
-        // allow to send to BungeeCord
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "Return", pcl = new PluginChannelListener());
     }
 
