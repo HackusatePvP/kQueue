@@ -12,8 +12,8 @@ import java.net.UnknownHostException;
 
 @Data
 public class Server {
-    private String name;
-    private int playerCount;
+    private String name, ip;
+    private int playerCount, port;
     private ServerState serverState;
 
     public Server(String name) {
@@ -24,7 +24,7 @@ public class Server {
         return playerCount;
     }
 
-    void getOnlineCount(String ip, int port, Server server) {
+    public void updatePlayerCount() {
         try {
             Socket sock = new Socket(ip, port);
 
@@ -43,11 +43,11 @@ public class Server {
             }
             String[] data = str.toString().split("§");
             int onlinePlayers = Integer.parseInt(data[1]);
-            server.setPlayerCount(onlinePlayers);
+            this.setPlayerCount(onlinePlayers);
         } catch (UnknownHostException e) {
-            Core.getPlugin().getLogger().info(server.getName() + ": Unknown host. Make sure you typed the ip and port correctly.");
+            Core.getPlugin().getLogger().info(this.getName() + ": Unknown host. Make sure you typed the ip and port correctly.");
         } catch (IOException e) {
-            Core.getPlugin().getLogger().info(server.getName() + ": connection refused. Make sure the server is online.");
+            Core.getPlugin().getLogger().info(this.getName() + ": connection refused. Make sure the server is online.");
         }
     }
 }

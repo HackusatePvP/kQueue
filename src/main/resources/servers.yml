@@ -11,3 +11,5 @@
 skyblock:
   name: "skyblock"
   server-state: "ONLINE"
+  ip: "localhost"
+  port: 25567

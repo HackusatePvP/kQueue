@@ -3,7 +3,6 @@ package cc.fatenetwork.kqueue.tasking;
 import cc.fatenetwork.kqueue.Core;
 import cc.fatenetwork.kqueue.queue.Queue;
 import cc.fatenetwork.kqueue.queue.QueuePlayer;
-import org.bukkit.Server;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class QueueTask extends BukkitRunnable {
