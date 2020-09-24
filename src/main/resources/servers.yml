@@ -6,6 +6,7 @@
 #
 # name will be used as the server name in the api
 # server-state has three options; ONLINE, OFFLINE, WHITELIST
+# ip can be the local ip or public ip of the bungeecord server
 ########################################################################################################################
 
 skyblock:
