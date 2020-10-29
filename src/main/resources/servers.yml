@@ -9,18 +9,22 @@
 # ip can be the local ip or public ip of the bungeecord server
 ########################################################################################################################
 
-skyblock:
-  name: "skyblock"
+########################################################################################################################
+# Server Queue Link
+# The `name: "server name"` must match the `server: "server name"`in the queues config.
+########################################################################################################################
+exmaple-server:
+  name: "example-server"
   enabled: true
   server-state: "ONLINE"
   ip: "localhost"
-  port: 25567
+  port: 25566
   item: "DIAMOND_SWORD"
-  display-name: "&2Skyblock"
+  display-name: "&2Example"
   lore:
     - "&7&m--&2*&7&m------------------------&2*&7&m--"
     - "&7Online: &a%ONLINE%/&2150"
     - "%STATE%"
     - ""
-    - "&7New skyblock server we are the best in the biz"
+    - "&7New example server we are the best in the biz"
     - "&7&m--&2*&7&m------------------------&2*&7&m--"

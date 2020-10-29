@@ -16,7 +16,7 @@ public class Queue {
     private String name, server, command;
     private int inQueue, amountToSend, sendDelay;
     @Deprecated int tick;
-    private boolean enabled, pause, hasServer;
+    private boolean enabled, pause, Server;
 
 
     public Queue(String name) {
@@ -29,7 +29,7 @@ public class Queue {
         this.name = name;
         this.inQueue = inQueue;
         this.enabled = enabled;
-        this.hasServer = isServer;
+        this.Server = isServer;
     }
 
     public void send(QueuePlayer queuePlayer) {

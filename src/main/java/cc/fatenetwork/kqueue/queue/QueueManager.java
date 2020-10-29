@@ -121,10 +121,13 @@ public class QueueManager implements QueueInterface {
             String path = s + ".";
             Queue queue = new Queue(config.getConfiguration().getString(path + "name"));
             queue.setEnabled(config.getBoolean(path + "enabled"));
-            queue.setHasServer(config.getConfiguration().getBoolean(path + "isServer"));
+            queue.setServer(config.getConfiguration().getBoolean(path + "isServer"));
             queue.setAmountToSend(config.getInt("send-amount"));
             queue.setSendDelay(config.getInt(path + "send-delay"));
             queue.setCommand(config.getString(path + "command"));
+            if (queue.isServer()) {
+                queue.setServer(path + "server");
+            }
             queues.put(queue.getName().toLowerCase(), queue);
             plugin.getLogger().info( "QUEUE: " + queue.getName() + " loaded");
         }

@@ -1,6 +1,6 @@
 ########################################################################################################################
 # Main queue configuration
-# exmaple:
+# example:
 #   name: "Example" this is case sensitive for the api
 #   enabled: true whether or not the player can join the queue
 #   send-amount: 10 The amount of players you want to send at one given time.
@@ -9,11 +9,16 @@
 #   server: "Example" only have this field if you have a server configured for the queue
 ########################################################################################################################
 
-skyblock:
-  name: "skyblock"
+
+########################################################################################################################
+# Server link configuration. If you have `isServer: true` you must copy `server: "you copy this string" into the servers.yml`
+# under the server you plan to create a queue for.
+########################################################################################################################
+exmaple:
+  name: "example"
   enabled: true
   send-amount: 5
   send-delay: 5
   isServer: true
-  server: "skyblock"
+  server: "example-server"
   command: "send %PLAYER% %QUEUE%"
