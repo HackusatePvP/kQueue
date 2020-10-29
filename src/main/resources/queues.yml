@@ -9,16 +9,11 @@
 #   server: "Example" only have this field if you have a server configured for the queue
 ########################################################################################################################
 
-example:
-  name: "Example"
+skyblock:
+  name: "skyblock"
   enabled: true
-  send-amount: 10
+  send-amount: 5
   send-delay: 5
   isServer: true
-  server: "Example"
-
-example2:
-  name: "Example2"
-  enabled: true
-  isServer: false #Since its false you do not add server: to the configuration
+  server: "skyblock"
   command: "send %PLAYER% %QUEUE%"

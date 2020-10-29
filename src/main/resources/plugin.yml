@@ -6,4 +6,3 @@ commands:
   queue:
     aliases: [q]
     description: Main queue executor
-  test:

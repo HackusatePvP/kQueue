@@ -22,17 +22,22 @@ public class ServerManager {
         return servers.get(name);
     }
 
+    public boolean isServer(String name) {
+        return servers.containsKey(name);
+    }
+
     public void setServerState(Server server, ServerState serverState) {
         server.setServerState(serverState);
     }
 
-    void loadServers() {
+    private void loadServers() {
         ConfigFile config = plugin.getConfiguration("servers");
         for (String s : config.getConfiguration().getConfigurationSection("").getKeys(false)) {
             String path = s + ".";
             Server server = new Server(config.getString(path + "name"));
             server.setServerState(ServerState.parse(config.getString(path + "server-state")));
             server.setPlayerCount(0);
+            server.setEnabled(config.getBoolean(path + "enabled"));
             updateServerCount();
             plugin.getLogger().info("SERVER: " + server.getName() + " loaded.");
             servers.put(server.getName(), server);

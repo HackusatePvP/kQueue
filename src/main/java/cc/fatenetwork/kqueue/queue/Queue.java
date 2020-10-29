@@ -1,5 +1,6 @@
 package cc.fatenetwork.kqueue.queue;
 
+import cc.fatenetwork.kqueue.Core;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Collection;
@@ -13,8 +14,10 @@ public class Queue {
     private Map<QueuePlayer, Integer> byWeight = new HashMap<>();
     private Map<QueuePlayer, Integer> byPosition = new HashMap<>();
     private String name, server, command;
-    private int inQueue, amountToSend, sendDelay, tick;
+    private int inQueue, amountToSend, sendDelay;
+    @Deprecated int tick;
     private boolean enabled, pause, hasServer;
+
 
     public Queue(String name) {
         this.name = name;
@@ -27,5 +30,9 @@ public class Queue {
         this.inQueue = inQueue;
         this.enabled = enabled;
         this.hasServer = isServer;
+    }
+
+    public void send(QueuePlayer queuePlayer) {
+        Core.getPlugin().getQueueInterface().sendPlayerToServer(queuePlayer, this);
     }
 }

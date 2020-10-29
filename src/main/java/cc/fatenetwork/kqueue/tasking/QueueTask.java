@@ -21,11 +21,13 @@ public class QueueTask extends BukkitRunnable {
             if (queue.getPlayers().size() > 0) {
                 int d = queue.getTick();
                 d++;
+                queue.setTick(d);
                 plugin.getLogger().info(queue.getName() + ": " + d + "/" + queue.getSendDelay());
                 if (d == queue.getSendDelay()) {
                     int amountToSend = 0;
                     do {
                         QueuePlayer queuePlayer = queue.getByPosition().keySet().stream().findFirst().orElse(null);
+                        plugin.getLogger().info("[QUEUE] Player went missing.");
                         if (queuePlayer != null) {
                             if (!queue.isPause()) {
                                 plugin.getQueueInterface().sendPlayerToServer(queuePlayer, queue);
@@ -34,8 +36,11 @@ public class QueueTask extends BukkitRunnable {
                         }
                     } while (amountToSend < queue.getAmountToSend());
                     plugin.getQueueInterface().updateQueue(queue);
-                    d = 0;
-                    queue.setTick(d);
+                    queue.setTick(0);
+                }
+            } else {
+                if (queue.getTick() != 0) {
+                    queue.setTick(0);
                 }
             }
         }

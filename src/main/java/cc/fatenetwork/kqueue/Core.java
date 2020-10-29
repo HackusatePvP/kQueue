@@ -1,7 +1,6 @@
 package cc.fatenetwork.kqueue;
 
 import cc.fatenetwork.kqueue.commands.QueueCommand;
-import cc.fatenetwork.kqueue.commands.TestCommand;
 import cc.fatenetwork.kqueue.configuration.ConfigFile;
 import cc.fatenetwork.kqueue.listener.PlayerListener;
 import cc.fatenetwork.kqueue.listener.QueueListener;
@@ -34,11 +33,13 @@ public final class Core extends JavaPlugin {
         if (!plugin.getDescription().getName().equals("kQueue")) {
             getServer().getPluginManager().disablePlugin(this);
         }
-        registerManagers();
-        registerEvents();
-        registerCommands();
-        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
-        Bukkit.getMessenger().registerIncomingPluginChannel(this, "Return", pcl = new PluginChannelListener());
+        if (checkLicense()) {
+            registerManagers();
+            registerEvents();
+            registerCommands();
+            Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+            Bukkit.getMessenger().registerIncomingPluginChannel(this, "Return", pcl = new PluginChannelListener());
+        }
     }
 
     @Override
@@ -60,22 +61,24 @@ public final class Core extends JavaPlugin {
         ));
     }
 
-    void registerManagers() {
-        serverManager = new ServerManager(plugin);
+    private void registerManagers() {
+        if (getConfiguration("config").getBoolean("server")) {
+            getLogger().warning("Server functionality has been disabled, plugin may not work properly.");
+            serverManager = new ServerManager(plugin);
+        }
         queueInterface = new QueueManager(plugin);
         queueTask = new QueueTask(this);
         queueTask.runTaskTimer(this, 0, 20);
     }
 
-    void registerEvents() {
+    private void registerEvents() {
         Arrays.asList(new PlayerListener(this), new QueueListener(this, getConfiguration("lang"))).forEach(listener -> {
             Bukkit.getPluginManager().registerEvents(listener, this);
         });
     }
 
-    void registerCommands() {
+     private void registerCommands() {
         getCommand("queue").setExecutor(new QueueCommand(this));
-        getCommand("test").setExecutor(new TestCommand());
     }
 
     private boolean checkLicense() {

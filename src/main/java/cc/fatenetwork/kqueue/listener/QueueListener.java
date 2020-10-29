@@ -29,6 +29,7 @@ public class QueueListener implements Listener {
         String queueName = event.getEventName();
         if (!plugin.getQueueInterface().isQueue(queueName)) {
             player.sendMessage(StringUtil.format(config.getString("queue-not-found")));
+            event.setCancelled(true);
             return;
         }
         if (queuePlayer.inQueue()) {
@@ -44,6 +45,7 @@ public class QueueListener implements Listener {
         String queueName = event.getQueue();
         if (!plugin.getQueueInterface().isQueue(queueName)) {
             player.sendMessage(StringUtil.format(config.getString("queue-not-found")));
+            event.setCancelled(true);
             return;
         }
         Queue queue = plugin.getQueueInterface().getQueue(queueName);

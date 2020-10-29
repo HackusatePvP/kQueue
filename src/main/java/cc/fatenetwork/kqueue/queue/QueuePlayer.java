@@ -1,6 +1,5 @@
 package cc.fatenetwork.kqueue.queue;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;

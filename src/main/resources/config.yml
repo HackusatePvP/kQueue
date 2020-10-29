@@ -3,9 +3,4 @@ license: "Insert"
 ##
 # false if you do not want to use server features such as; ping, playercount, status
 ##
-server: false
-
-##
-# False if you do not want to use queues for whatever reason
-##
-queue: true
+server: true

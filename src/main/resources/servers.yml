@@ -11,6 +11,16 @@
 
 skyblock:
   name: "skyblock"
+  enabled: true
   server-state: "ONLINE"
   ip: "localhost"
   port: 25567
+  item: "DIAMOND_SWORD"
+  display-name: "&2Skyblock"
+  lore:
+    - "&7&m--&2*&7&m------------------------&2*&7&m--"
+    - "&7Online: &a%ONLINE%/&2150"
+    - "%STATE%"
+    - ""
+    - "&7New skyblock server we are the best in the biz"
+    - "&7&m--&2*&7&m------------------------&2*&7&m--"

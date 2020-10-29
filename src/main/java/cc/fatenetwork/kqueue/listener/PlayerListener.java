@@ -34,5 +34,4 @@ public class PlayerListener implements Listener {
         }
         plugin.getQueueInterface().getQueuePlayers().remove(event.getPlayer().getUniqueId());
     }
-
 }

@@ -11,7 +11,9 @@ argument-not-found: "&cCould not find %ARG% for %CMD%."
 ###
 already-in-queue: "&cYou are already in a queue."
 queue-leave: "&cYou have left the %QUEUE% queue."
-queue-pause: "&c%QUEUE% queue is paused."
+pause-queue: "&c%QUEUE% queue is paused."
+resume-queue: "&a%QUEUE% queue is resumed."
+
 
 ###
 #configurations blow can have the following placeholder

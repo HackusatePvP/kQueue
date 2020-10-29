@@ -35,7 +35,6 @@ public class QueueCommand implements CommandExecutor {
             List<String> message = new ArrayList<>();
             message.add("&7&m------------------------------------------");
             message.add("&b&lQueue &3Help");
-            message.add("");
             message.add("&3/queue join &b<queue>");
             message.add("&3/queue leave &b<queue>");
             if (player.hasPermission("queue.admin")) {
@@ -93,9 +92,9 @@ public class QueueCommand implements CommandExecutor {
                     }
                     Queue queue = plugin.getQueueInterface().getQueue(args[1].toLowerCase());
                     if (queue.isPause()) {
-                        player.sendMessage(StringUtil.format(format(config.getString("resume-queue"), queuePlayer.getQueue())));
+                        player.sendMessage(StringUtil.format(format(config.getString("resume-queue"), queue)));
                     } else {
-                        player.sendMessage(StringUtil.format(format(config.getString("pause-queue"), queuePlayer.getQueue())));
+                        player.sendMessage(StringUtil.format(format(config.getString("pause-queue"), queue)));
                     }
                     queue.setPause(!queue.isPause());
                 } else if (args[0].equalsIgnoreCase("resume")) {

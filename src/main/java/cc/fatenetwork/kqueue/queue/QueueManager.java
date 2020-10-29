@@ -79,8 +79,7 @@ public class QueueManager implements QueueInterface {
 
     @Override
     public void updateQueue(Queue queue) {
-        //We need to maps so we can properly sort the queue based by the players priority and by position
-
+        //We need 2 maps so we can properly sort the queue based by the players priority and by position
         Map<QueuePlayer, Integer> sortedByPlayers;
         Map<QueuePlayer, Integer> sortedByPosition;
 
@@ -91,6 +90,8 @@ public class QueueManager implements QueueInterface {
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
         queue.setByWeight(sortedByPlayers);
 
+        //todo we could simply this process by getting the position based on the index + 1
+
         //once the map is sorted by priority we can now set their positions based on there placement in the map
        AtomicInteger pos = new AtomicInteger();
        sortedByPlayers.forEach((key, value) -> {
@@ -98,7 +99,7 @@ public class QueueManager implements QueueInterface {
             queue.getByPosition().put(key, pos.intValue());
        });
 
-       //now lets resort the map based on the positions. This will be in reversed order, so the player with the lowest poisiton appear first
+       //now lets resort the map based on the positions. This will be in reversed order, so the player with the lowest position appear first
        sortedByPosition = queue.getByPosition().entrySet().stream()
                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
@@ -129,7 +130,7 @@ public class QueueManager implements QueueInterface {
         }
     }
 
-    void sendPlayer(QueuePlayer queuePlayer, String channel, String command, Queue queue){
+    private void sendPlayer(QueuePlayer queuePlayer, String channel, String command, Queue queue){
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream(b);
         try {
