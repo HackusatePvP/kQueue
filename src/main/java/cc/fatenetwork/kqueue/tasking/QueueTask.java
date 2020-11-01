@@ -27,10 +27,10 @@ public class QueueTask extends BukkitRunnable {
                     int amountToSend = 0;
                     do {
                         QueuePlayer queuePlayer = queue.getByPosition().keySet().stream().findFirst().orElse(null);
-                        plugin.getLogger().info("[QUEUE] Player went missing.");
                         if (queuePlayer != null) {
                             if (!queue.isPause()) {
-                                plugin.getQueueInterface().sendPlayerToServer(queuePlayer, queue);
+                                plugin.getQueueInterface().sendPlayerToServer(queuePlayer, queuePlayer.getQueue());
+                                plugin.getLogger().info("sent " + queuePlayer.getPlayer().getName() + " to " + queuePlayer.getQueue().getServer());
                                 amountToSend++;
                             }
                         }
@@ -40,6 +40,7 @@ public class QueueTask extends BukkitRunnable {
                 }
             } else {
                 if (queue.getTick() != 0) {
+                    plugin.getLogger().info("[QUEUE] Player went missing.");
                     queue.setTick(0);
                 }
             }

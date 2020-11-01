@@ -6,6 +6,7 @@ import cc.fatenetwork.kqueue.events.QueueSendEvent;
 import cc.fatenetwork.kqueue.utils.StringUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -70,11 +71,13 @@ public class QueueManager implements QueueInterface {
     @Override
     public void sendPlayerToServer(QueuePlayer queuePlayer, Queue queue) {
         QueueSendEvent event = new QueueSendEvent(queue.getName(), queuePlayer);
-        if (!event.isCancelled()) {
+        Bukkit.getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            Bukkit.getLogger().info("[QUEUE] event cancelled");
             return;
         }
         String command = "send " + queuePlayer.getPlayer().getName() + " " + queue.getName();
-        sendPlayer(queuePlayer, "get", command, queue);
+        sendPlayer(queuePlayer.getPlayer(), "get", command, queue);
     }
 
     @Override
@@ -121,11 +124,11 @@ public class QueueManager implements QueueInterface {
             String path = s + ".";
             Queue queue = new Queue(config.getConfiguration().getString(path + "name"));
             queue.setEnabled(config.getBoolean(path + "enabled"));
-            queue.setServer(config.getConfiguration().getBoolean(path + "isServer"));
+            queue.setLink(config.getConfiguration().getBoolean(path + "isServer"));
             queue.setAmountToSend(config.getInt("send-amount"));
             queue.setSendDelay(config.getInt(path + "send-delay"));
             queue.setCommand(config.getString(path + "command"));
-            if (queue.isServer()) {
+            if (queue.isLink()) {
                 queue.setServer(path + "server");
             }
             queues.put(queue.getName().toLowerCase(), queue);
@@ -133,19 +136,16 @@ public class QueueManager implements QueueInterface {
         }
     }
 
-    private void sendPlayer(QueuePlayer queuePlayer, String channel, String command, Queue queue){
+    private void sendPlayer(Player player, String channel, String command, Queue queue){
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream(b);
         try {
             out.writeUTF(channel);
             out.writeUTF(command);
         } catch (IOException e) {
-            Bukkit.getLogger().log(Level.SEVERE, "[Queue] Target server is not online. Check configuration and server status.");
-            removeFromQueue(queuePlayer, queue);
-            queuePlayer.getPlayer().sendMessage(StringUtil.format("&cServer not found or is not online."));
-            removeFromQueue(queuePlayer, queue);
+            Bukkit.getLogger().log(Level.SEVERE, "[Queue] Target server is not online, please make sure you have typed the ip correctly and the server is online.");
         }
-        queuePlayer.getPlayer().sendPluginMessage(Core.getPlugin(Core.class), "BungeeCord", b.toByteArray());
+        player.sendPluginMessage(Core.getPlugin(Core.class), "BungeeCord", b.toByteArray());
     }
 
     private String format(String message, QueuePlayer queuePlayer) {
