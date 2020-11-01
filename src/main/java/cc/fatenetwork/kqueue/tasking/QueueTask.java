@@ -30,7 +30,6 @@ public class QueueTask extends BukkitRunnable {
                         if (queuePlayer != null) {
                             if (!queue.isPause()) {
                                 plugin.getQueueInterface().sendPlayerToServer(queuePlayer, queuePlayer.getQueue());
-                                plugin.getLogger().info("sent " + queuePlayer.getPlayer().getName() + " to " + queuePlayer.getQueue().getServer());
                                 amountToSend++;
                             }
                         }
