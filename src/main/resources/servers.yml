@@ -13,7 +13,7 @@
 # Server Queue Link
 # The `name: "server name"` must match the `server: "server name"`in the queues config.
 ########################################################################################################################
-exmaple-server:
+example-server:
   name: "example-server"
   enabled: true
   server-state: "ONLINE"

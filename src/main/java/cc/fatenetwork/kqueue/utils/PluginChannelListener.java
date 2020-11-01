@@ -4,7 +4,6 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
-
 import java.util.HashMap;
 
 public class PluginChannelListener implements PluginMessageListener {

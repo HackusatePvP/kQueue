@@ -33,13 +33,12 @@ public final class Core extends JavaPlugin {
         if (!plugin.getDescription().getName().equals("kQueue")) {
             getServer().getPluginManager().disablePlugin(this);
         }
-        if (checkLicense()) {
-            registerManagers();
-            registerEvents();
-            registerCommands();
-            Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
-            Bukkit.getMessenger().registerIncomingPluginChannel(this, "Return", pcl = new PluginChannelListener());
-        }
+        registerManagers();
+        registerEvents();
+        registerCommands();
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        // allow to send to BungeeCord
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, "Return", pcl = new PluginChannelListener());
     }
 
     @Override
@@ -63,10 +62,11 @@ public final class Core extends JavaPlugin {
 
     private void registerManagers() {
         if (getConfiguration("config").getBoolean("server")) {
-            getLogger().warning("Server functionality has been disabled, plugin may not work properly.");
             serverManager = new ServerManager(plugin);
+        } else {
+            getLogger().warning("Server functionality has been disabled, plugin may not work properly.");
         }
-        queueInterface = new QueueManager(plugin);
+        queueInterface = new QueueManager(this);
         queueTask = new QueueTask(this);
         queueTask.runTaskTimer(this, 0, 20);
     }
@@ -81,7 +81,4 @@ public final class Core extends JavaPlugin {
         getCommand("queue").setExecutor(new QueueCommand(this));
     }
 
-    private boolean checkLicense() {
-        return true;
-    }
 }

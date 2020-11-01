@@ -56,7 +56,7 @@ public class QueueCommand implements CommandExecutor {
                         player.sendMessage(StringUtil.format(config.getString("not-in-queue")));
                         return true;
                     }
-                    player.sendMessage(StringUtil.format(format(config.getString("leave-queue"), queuePlayer.getQueue())));
+                    player.sendMessage(StringUtil.format(format(config.getString("queue-leave"), queuePlayer.getQueue())));
                     plugin.getQueueInterface().removeFromQueue(queuePlayer, queuePlayer.getQueue());
                 } else if (args[0].equalsIgnoreCase("pause")) {
                     if (player.hasPermission("queue.admin")) {

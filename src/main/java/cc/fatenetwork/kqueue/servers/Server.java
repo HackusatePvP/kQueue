@@ -16,6 +16,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 @Data
 public class Server {
@@ -34,8 +37,9 @@ public class Server {
 
     public ItemStack getServerItem() {
         ConfigFile config = Core.getPlugin().getConfiguration("servers");
+        Logger log = Bukkit.getLogger();
         try {
-            ItemStack itemStack = new ItemStack(Material.getMaterial(config.getString(getName() + ".item")));
+            ItemStack itemStack = new ItemStack(Material.getMaterial(config.getConfiguration().getString(getName() + ".item")));
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName(StringUtil.format(config.getString(getName() + ".display-name")));
             itemMeta.setLore(Color.formatServerLore(config.getStringList(getName() + ".lore"), this));
@@ -43,7 +47,24 @@ public class Server {
             return itemStack;
         } catch (Exception e) {
             e.printStackTrace();
-            return new ItemStack(Material.GRASS); //default item
+            ItemStack itemStack = new ItemStack(Material.REDSTONE);
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.setDisplayName(StringUtil.format("&c&lERROR: "));
+            List<String> lore = new ArrayList<>();
+            lore.add("&7&m--------------------------------------------");
+            lore.add("&7There appears to be an error for \"&4" + getName() + "\"");
+            lore.add("&7Located in &4`servers.yml` &7this is most likely caused");
+            lore.add("&7an incorrect item configuration.");
+            lore.add("&7Check console for printed information about the config");
+            lore.add("&7&m--------------------------------------------");
+            itemMeta.setLore(StringUtil.format(lore));
+            itemStack.setItemMeta(itemMeta);
+
+            log.info("[Material] " + config.getString(getName() + ".item"));
+            log.info("[Display-Name] " + config.getString(getName() + ".display-name"));
+            //todo array
+
+            return itemStack;
         }
     }
 
