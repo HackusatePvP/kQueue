@@ -1,6 +1,9 @@
 # kQueue
 kQueue is a simple queue plugin designed for BungeeCord to limit the amount of players that can join a server at one given time.
 
+## Bungee
+In order for bungee to work properly you must have [lotus-sync](https://github.com/HackusatePvP/Lotus-sync/releases/tag/1.0.0) installed into your bungeecord plugins folder.
+
 ## Beta
 2.1 beta has now been released, be sure to review each change before changing api versions. The api has had some major changes you will need to reset your configs.
 
