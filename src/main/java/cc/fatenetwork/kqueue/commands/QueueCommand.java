@@ -80,6 +80,10 @@ public class QueueCommand implements CommandExecutor {
                         return true;
                     }
                     Queue queue = plugin.getQueueInterface().getQueue(args[1].toLowerCase());
+                    if (queue == null) {
+                        player.sendMessage(StringUtil.format(format(config.getString("queue-not-found"), args[1])));
+                        return true;
+                    }
                     plugin.getQueueInterface().addToQueue(queuePlayer, queue);
                 } else if (args[0].equalsIgnoreCase("pause")) {
                     if (!(player.hasPermission("queue.admin"))) {
@@ -91,6 +95,10 @@ public class QueueCommand implements CommandExecutor {
                         return true;
                     }
                     Queue queue = plugin.getQueueInterface().getQueue(args[1].toLowerCase());
+                    if (queue == null) {
+                        player.sendMessage(StringUtil.format(format(config.getString("queue-not-found"), args[1])));
+                        return true;
+                    }
                     if (queue.isPause()) {
                         player.sendMessage(StringUtil.format(format(config.getString("resume-queue"), queue)));
                     } else {
@@ -107,6 +115,10 @@ public class QueueCommand implements CommandExecutor {
                         return true;
                     }
                     Queue queue = plugin.getQueueInterface().getQueue(args[1].toLowerCase());
+                    if (queue == null) {
+                        player.sendMessage(StringUtil.format(format(config.getString("queue-not-found"), args[1])));
+                        return true;
+                    }
                     if (queue.isPause()) {
                         player.sendMessage(StringUtil.format(format(config.getString("resume-queue"), queuePlayer.getQueue())));
                     } else {
