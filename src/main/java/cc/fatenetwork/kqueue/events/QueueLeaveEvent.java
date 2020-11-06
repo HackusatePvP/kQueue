@@ -1,6 +1,5 @@
 package cc.fatenetwork.kqueue.events;
 
-import cc.fatenetwork.kqueue.queue.Queue;
 import cc.fatenetwork.kqueue.queue.QueuePlayer;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;

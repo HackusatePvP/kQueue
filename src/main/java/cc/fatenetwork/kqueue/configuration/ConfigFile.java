@@ -1,7 +1,6 @@
 package cc.fatenetwork.kqueue.configuration;
 
 import lombok.Data;
-import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;

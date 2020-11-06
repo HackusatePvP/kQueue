@@ -1,7 +1,6 @@
 package cc.fatenetwork.kqueue.listener;
 
 import cc.fatenetwork.kqueue.Core;
-import cc.fatenetwork.kqueue.QueueAPI;
 import cc.fatenetwork.kqueue.configuration.ConfigFile;
 import cc.fatenetwork.kqueue.events.QueueJoinEvent;
 import cc.fatenetwork.kqueue.events.QueueLeaveEvent;
@@ -24,8 +23,8 @@ public class QueueListener implements Listener {
 
     @EventHandler
     public void onQueueJoin(QueueJoinEvent event) {
-        Player player = event.getPlayer();
         QueuePlayer queuePlayer = event.getQueuePlayer();
+        Player player = queuePlayer.getPlayer();
         String queueName = event.getEventName();
         if (!plugin.getQueueInterface().isQueue(queueName)) {
             player.sendMessage(StringUtil.format(config.getString("queue-not-found")));
@@ -62,10 +61,9 @@ public class QueueListener implements Listener {
     @EventHandler
     public void onQueuePause(QueuePauseEvent event) {
         Player player = event.getPlayer();
-        QueuePlayer queuePlayer = event.getQueuePlayer();
         String queueName = event.getQueue();
 
-        if (plugin.getQueueInterface().isQueue(queueName)) {
+        if (!plugin.getQueueInterface().isQueue(queueName)) {
             player.sendMessage(StringUtil.format(config.getString("queue-not-found")));
             event.setCancelled(true);
         }

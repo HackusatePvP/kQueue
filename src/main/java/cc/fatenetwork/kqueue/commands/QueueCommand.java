@@ -7,6 +7,8 @@ import cc.fatenetwork.kqueue.events.QueuePauseEvent;
 import cc.fatenetwork.kqueue.events.QueueResumeEvent;
 import cc.fatenetwork.kqueue.queue.Queue;
 import cc.fatenetwork.kqueue.queue.QueuePlayer;
+import cc.fatenetwork.kqueue.servers.Server;
+import cc.fatenetwork.kqueue.utils.Color;
 import cc.fatenetwork.kqueue.utils.StringUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -70,6 +72,23 @@ public class QueueCommand implements CommandExecutor {
                         return true;
                     }
                     player.sendMessage(StringUtil.format(config.getString("no-permissions")));
+                } else if (args[0].equalsIgnoreCase("list")) {
+                    List<String> message = new ArrayList<>();
+                    message.add("&7&m---------------------------------------");
+                    for (Queue queue : plugin.getQueueInterface().getQueues().values()) {
+                        if (queue.isLink()) {
+                            Server server = plugin.getServerManager().getServer(queue.getServer());
+                            if (server != null) {
+                                message.add(" &7* &c" + queue.getName() + ": " + Color.translateState(server.getServerState()));
+                            } else {
+                                message.add(" &7* &c" + queue.getName());
+                            }
+                        } else {
+                            message.add(" &7* &c" + queue.getName());
+                        }
+                    }
+                    message.add("&7&m---------------------------------------");
+                    message.forEach(msg -> player.sendMessage(StringUtil.format(msg)));
                 } else {
                     player.sendMessage(StringUtil.format(format(config.getString("argument-not-found"), label, command.getName())));
                 }

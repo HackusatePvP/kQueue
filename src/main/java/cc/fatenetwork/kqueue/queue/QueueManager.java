@@ -65,6 +65,7 @@ public class QueueManager implements QueueInterface {
         queue.getPlayers().remove(queuePlayer);
         queue.getByPosition().remove(queuePlayer);
         queue.getByWeight().remove(queuePlayer);
+        queuePlayer.setQueue(null);
         updateQueue(queue);
     }
 
@@ -76,7 +77,8 @@ public class QueueManager implements QueueInterface {
             Bukkit.getLogger().info("[QUEUE] event cancelled");
             return;
         }
-        String command = "send " + queuePlayer.getPlayer().getName() + " " + queue.getName();
+        //String command = "send " + queuePlayer.getPlayer().getName() + " " + queue.getName();
+        String command = format(plugin.getConfiguration("queues").getString(queue.getName() + ".command"), queuePlayer);
         sendPlayer(queuePlayer.getPlayer(), "get", command, queue);
     }
 
@@ -95,7 +97,7 @@ public class QueueManager implements QueueInterface {
 
         //todo we could simply this process by getting the position based on the index + 1
 
-        //once the map is sorted by priority we can now set their positions based on there placement in the map
+        //once the map is sorted by weight we can now set their positions based on there placement in the map
        AtomicInteger pos = new AtomicInteger();
        sortedByPlayers.forEach((key, value) -> {
             pos.getAndIncrement();
@@ -150,6 +152,7 @@ public class QueueManager implements QueueInterface {
 
     private String format(String message, QueuePlayer queuePlayer) {
         message = message.replace("%QUEUE%", queuePlayer.getQueue().getName());
+        message = message.replace("%PLAYER%", queuePlayer.getPlayer().getName());
         message = message.replace("%POSITION%", queuePlayer.getPosition() + "");
         message = message.replace("%QUEUESIZE%", queuePlayer.getQueue().getPlayers().size() + "");
         return message;

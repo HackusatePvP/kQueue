@@ -2,7 +2,6 @@ package cc.fatenetwork.kqueue;
 
 import cc.fatenetwork.kqueue.queue.Queue;
 import cc.fatenetwork.kqueue.queue.QueuePlayer;
-import cc.fatenetwork.kqueue.servers.Server;
 import org.bukkit.entity.Player;
 
 import java.util.Collection;

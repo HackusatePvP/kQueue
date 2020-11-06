@@ -3,8 +3,6 @@ package cc.fatenetwork.kqueue;
 import cc.fatenetwork.kqueue.servers.Server;
 import cc.fatenetwork.kqueue.servers.ServerState;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
 
