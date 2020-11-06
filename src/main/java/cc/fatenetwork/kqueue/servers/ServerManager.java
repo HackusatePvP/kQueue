@@ -38,6 +38,8 @@ public class ServerManager {
             server.setServerState(ServerState.parse(config.getString(path + "server-state")));
             server.setPlayerCount(0);
             server.setEnabled(config.getBoolean(path + "enabled"));
+            server.setIp(config.getString(path + "ip"));
+            server.setPort(config.getInt(path + "port"));
             updateServerCount();
             plugin.getLogger().info("SERVER: " + server.getName() + " loaded.");
             servers.put(server.getName(), server);

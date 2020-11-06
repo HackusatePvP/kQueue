@@ -4,7 +4,6 @@ import cc.fatenetwork.kqueue.Core;
 import cc.fatenetwork.kqueue.configuration.ConfigFile;
 import cc.fatenetwork.kqueue.utils.Color;
 import cc.fatenetwork.kqueue.utils.StringUtil;
-import com.google.common.annotations.Beta;
 import lombok.Data;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

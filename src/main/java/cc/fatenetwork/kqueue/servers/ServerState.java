@@ -1,7 +1,5 @@
 package cc.fatenetwork.kqueue.servers;
 
-import cc.fatenetwork.kqueue.Core;
-
 public enum ServerState {
 
     OFFLINE("OFFLINE"), ONLINE("ONLINE"), WHITELIST("WHITELIST");
